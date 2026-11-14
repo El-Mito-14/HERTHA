@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#ffffff"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
+<title>Hertha KWR</title>
+<style>
+:root{--h:215;--a:hsl(var(--h) 80% 42%);--p:hsl(var(--h) 80% 42%/.22);--bg:#fff;--fg:#2b2b2b;--ln:#bdbdbd}
+body.dk{--bg:#2b2b2b;--fg:#fff;--ln:#666}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:system-ui,sans-serif;overflow:hidden}
+#hd{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;padding:0 100px 0 14px;font-weight:700;font-size:18px;z-index:40;white-space:nowrap;overflow:hidden}
+#gear{position:fixed;top:8px;right:8px;width:40px;height:40px;z-index:70;font-size:28px;border:0;background:none;color:var(--fg);padding:0}
+#tp{position:fixed;top:11px;right:54px;height:34px;padding:0 14px;z-index:70;border:0;border-radius:17px;background:var(--a);color:#fff;font-weight:700;font-size:15px;display:none}
+.v{position:absolute;inset:56px 0 0 0;display:none;overflow:auto;padding:14px;touch-action:pan-y}
+#sp{flex-direction:column;overflow:hidden;touch-action:none}
+#sp p{text-align:center;margin:0 0 8px;font-size:15px;opacity:.7}
+#sr{flex:1;position:relative;touch-action:none}
+.sb{position:absolute;left:0;top:0;width:56px;height:56px;border:2px solid var(--a);background:var(--p);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:var(--fg)}
+.sb.h{box-shadow:inset 0 0 0 4px var(--a)}.sb.on{background:var(--a);color:#fff}
+#sk{align-self:center;margin:10px 0 18px;padding:12px 26px;border:0;border-radius:12px;background:var(--fg);color:var(--bg);font-size:16px;font-weight:700}
+.cb{display:block;width:100%;margin-bottom:12px;padding:18px;border-radius:14px;border:0;background:var(--fg);color:var(--bg);font-size:19px;font-weight:700;text-align:left}
+.cb small{display:block;margin-top:4px;font-size:13px;font-weight:500;opacity:.75}
+.g{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.n{aspect-ratio:1;border-radius:12px;padding:3px;background:conic-gradient(var(--a) calc(var(--pr)*1%),var(--ln) 0)}
+.n div{width:100%;height:100%;border-radius:9px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px}
+.n.s div{background:var(--p)}
+#pz{overflow:hidden;touch-action:none;padding:0}
+#gv{position:absolute;left:0;right:0;top:0;bottom:0;overflow:hidden;touch-action:none}
+#wr{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.c{position:absolute;border:1px solid var(--ln);display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);--tc:var(--fg)}
+.q{background:color-mix(in srgb,var(--fg) 14%,var(--bg));font-size:10.5px;line-height:1.1;text-align:center;padding:2px;hyphens:auto;overflow-wrap:anywhere;font-weight:600}
+.l b{font-size:26px;font-weight:700}
+.l.hl{background:var(--p)}.l.fx b{color:var(--a)}.l.sv{background:var(--a);--tc:#fff}.l.sv b{color:#fff}
+.l.sl{box-shadow:inset 0 0 0 3px var(--a)}
+.l i{position:absolute;width:0;height:0}
+i.r0{left:0;top:calc(50% - 9px);border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:11px solid var(--tc)}
+i.r1{top:0;left:calc(50% - 9px);border-left:9px solid transparent;border-right:9px solid transparent;border-top:11px solid var(--tc)}
+#pn{position:fixed;top:60px;left:10px;right:10px;height:52px;z-index:45;border:2px solid var(--a);border-radius:12px;background:var(--bg);display:flex;align-items:center;padding:0 12px;transform:translateY(-140%);opacity:0;transition:.22s;pointer-events:none}
+#pn.o{transform:none;opacity:1}
+#pn .n1{font-weight:700;margin-right:12px;color:var(--a)}
+#pn .d{flex:1;display:flex;gap:4px;justify-content:center}
+#pn .d span{flex:1;max-width:26px;height:30px;border-bottom:3px solid var(--fg);text-align:center;font-weight:700;font-size:20px}
+#pn .d span.f{color:var(--a)}
+#kb{position:fixed;left:0;right:0;bottom:0;height:218px;padding:8px 4px;background:color-mix(in srgb,var(--fg) 10%,var(--bg));transform:translateY(100%);transition:transform .2s;z-index:50;touch-action:none}
+#kb.o{transform:none}
+.kr{display:flex;gap:5px;margin-bottom:6px}
+.kk{flex:1;height:60px;border-radius:8px;background:var(--bg);color:var(--fg);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;border:1px solid var(--ln)}
+.kk:active{background:var(--p)}
+#st{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:34px}
+#rg{position:relative;width:270px;height:270px;touch-action:none}
+#rg .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(hsl(0 80% 42%),hsl(60 80% 42%),hsl(120 80% 42%),hsl(180 80% 42%),hsl(240 80% 42%),hsl(300 80% 42%),hsl(360 80% 42%));-webkit-mask:radial-gradient(circle,transparent 86px,#000 87px);mask:radial-gradient(circle,transparent 86px,#000 87px)}
+#mk{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;border:3px solid #fff;background:var(--a);transform:rotate(calc(var(--h)*1deg)) translateY(-110px);pointer-events:none;box-shadow:0 0 0 1px #0003}
+#fd{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px;border-radius:50%;border:0;background:var(--a);color:#fff;font-size:22px;font-weight:700}
+#md{border:0;border-radius:14px;padding:14px 26px;font-size:17px;font-weight:700;background:#2b2b2b;color:#fff}
+body.dk #md{background:#fff;color:#2b2b2b}
+#md span{color:var(--a);font-size:20px;margin-right:6px}
+</style></head><body>
+<div id="hd"></div><button id="gear">⚙</button><button id="tp">Tipp</button>
+<div class="v" id="sp"><p>Verbinde die Buchstaben der Reihe nach</p><div id="sr"></div><button id="sk">Überspringen</button></div>
+<div class="v" id="ct"></div><div class="v" id="ls"></div>
+<div class="v" id="pz"><div id="gv"><div id="wr"></div></div></div>
+<div id="pn"></div><div id="kb"></div>
+<div id="st"><div id="rg"><div class="ring"></div><div id="mk"></div><button id="fd">Fertig</button></div><button id="md"></button></div>
+<script>
+const $=s=>document.querySelector(s),el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const CN=["Verein & Fußball","Spieler & Legenden","Trainer & Führung","Stadion & Fans","Geschichte & Erfolge"];
+const RAW=[
+"HERTHA|Vorname des Vereins;BSC|Kürzel hinter Hertha;BLAU|Eine Vereinsfarbe;WEISS|Zweite Vereinsfarbe;ALTEDAME|Spitzname des Clubs;BERLIN|Heimatstadt;BAER|Berliner Wappentier;HERTHINHO|Name des Maskottchens;LOGO|Dickes B im Vereins-...;UNION|Stadtrivale;DERBY|Duell mit Union;DAMPFER|Gab dem Verein den Namen;FUSSBALL|Sportart;TOR|Hier muss der Ball rein;BALL|Rundes Spielgerät;ANSTOSS|Beginn der Partie;ABSEITS|Regelverstoß vor dem Tor;ECKE|Standard von der Fahne;ELFMETER|Strafstoß;KAPITAEN|Trägt die Binde;TRAINER|Coach an der Seitenlinie;MANNSCHAFT|Elf Spieler im Team;SAISON|Eine Spielzeit;HEIMSPIEL|Partie im eigenen Stadion;TABELLE|Zeigt den Rang;PUNKTE|Gibt es für Siege;SIEG|Drei Punkte;AUSWAERTS|Spiel beim Gegner;STURM|Angriffsreihe;ABWEHR|Verteidigung;TORWART|Letzter Mann;MITTELFELD|Zwischen Abwehr und Sturm;TRIKOT|Spielerhemd;PFIFF|Signal des Schiris;SCHIRI|Leitet das Spiel;FLANKE|Hohe Hereingabe",
+"DARDAI|Ungar, später Trainer;PREETZ|Torschützenkönig 1999;MARCELINHO|Brasilianischer Spielmacher;FRIEDRICH|Arne, Verteidiger;PANTELIC|Serbischer Stürmer;RONNY|Brasilianischer Freistoßschütze;KALOU|Ivorischer Stürmer;IBISEVIC|Bosnischer Torjäger;JARSTEIN|Norwegischer Torwart;SELKE|Stürmer Davie;STARK|Verteidiger Niklas;PLATTENHARDT|Linksverteidiger Marvin;LUKEBAKIO|Belgischer Flügelspieler;CUNHA|Brasilianischer Stürmer Matheus;PIATEK|Polnischer Stürmer;CORDOBA|Kolumbianischer Stürmer;TOUSART|Franzose im Mittelfeld;DEISLER|Talent, wechselte zu Bayern;SOBEK|Hanne, Meister 1930;KRAFT|Torwart Thomas;SKJELBRED|Norweger im Mittelfeld;NIEMEYER|Mittelfeldmann Peter;STOCKER|Schweizer Valentin;TORUNARIGHA|Jordan, Abwehrspieler;REKIK|Innenverteidiger Karim;NEUENDORF|Andreas, Mittelfeld;EIGENGEWAECHS|Spieler aus der Jugend;LEGENDE|Unvergessener Spieler;TORJAEGER|Trifft am häufigsten;REKORDSPIELER|Meiste Einsätze",
+"ROEBER|Jürgen, Champions-League-Coach;FAVRE|Schweizer Trainer;STEVENS|Huub, Niederländer;GOETZ|Falko, ehemaliger Coach;FUNKEL|Friedhelm, Trainer 2010;BABBEL|Markus, Trainer 2012;LUHUKAY|Jos, Aufstiegstrainer;DARDAI|Mehrfach Cheftrainer;KLINSMANN|Jürgen, kurz 2019/20;LABBADIA|Bruno, Trainer 2020;MAGATH|Felix, Retter 2021;SCHWARZ|Sandro, Trainer 2022;KORKUT|Tayfun, Trainer 2022;PREETZ|Manager bis 2021;WINDHORST|Lars, Investor;TENNOR|Windhorsts Firma;GEGENBAUER|Werner, langjähriger Präsident;BOBIC|Fredi, Geschäftsführer;PRAESIDENT|Chef des Vereins;MANAGER|Verantwortlich für Transfers;TRANSFER|Spielerwechsel;VORSTAND|Führung des Vereins;AUFSICHTSRAT|Kontrollgremium;INVESTOR|Geldgeber;SPORTDIREKTOR|Plant den Kader;ASSISTENT|Hilft dem Cheftrainer;TAKTIK|Plan des Trainers;TRAINING|Übungseinheit;AUFSTELLUNG|Elf für das Spiel;WECHSEL|Einwechslung;KADER|Alle Spieler;ENTLASSUNG|Ende beim Verein",
+"OLYMPIASTADION|Heimstätte in Berlin;OSTKURVE|Heimat der Ultras;OLYMPIAPARK|Gelände ums Stadion;FANS|Anhänger;HERTHANER|So heißen die Fans;HYMNE|Vereinslied;ZANDER|Frank, Sänger der Hymne;HARLEKINS|Berliner Ultragruppe;FAHNE|Wird in der Kurve geschwenkt;PLUMPE|Altes Stadion in Gesundbrunnen;GESUNDBRUNNEN|Ortsteil der Plumpe;MARATHONTOR|Berühmtes Stadiontor;LAUFBAHN|Im Olympiastadion blau;DACH|Überspannt die Tribünen;RASEN|Spielfläche;FLUTLICHT|Abendbeleuchtung;TRIBUENE|Sitzplatzbereich;KURVE|Stehplatzbereich;CHOREO|Aufwendige Fanaktion;SPRECHCHOR|Rhythmischer Gesang;TICKET|Eintrittskarte;DAUERKARTE|Saisonticket;FANSHOP|Laden für Trikots;VORSAENGER|Leitet die Gesänge;SCHAL|Fanartikel für den Hals;STIMMUNG|Lautstärke im Stadion;ZUSCHAUER|Besucher im Stadion;STADION|Spielstätte;FLAGGE|Vereinsfahne;SITZPLATZ|Platz auf der Tribüne;STEHPLATZ|Platz in der Kurve",
+"MEISTER|Titelträger 1930 und 1931;POKALFINALE|Endspiel 1977 und 1979;POKAL|K.o.-Wettbewerb;CHAMPIONSLEAGUE|Königsklasse, 1999 dabei;GRUENDUNG|Fand 1892 statt;FUSION|Zusammenschluss 1923;ABSTIEG|Runter in Liga zwei;AUFSTIEG|Rauf in die Erste Liga;LIZENZENTZUG|1965 Strafe für den Verein;BUNDESLIGA|Seit 1963 dabei;PLUMPE|Altes Stadion in Berlin;VIZEMEISTER|Zweiter der Liga;FINALE|Letztes Spiel im Pokal;TITEL|Gewonnene Trophäe;TORSCHUETZENKOENIG|Preetz holte ihn 1999;RELEGATION|Spiele gegen den Abstieg;HSV|Relegationsgegner 2022;CHRONIK|Geschichtsbuch;GESCHICHTE|Alles seit 1892;JUBILAEUM|Runder Geburtstag;TRADITION|Gepflegtes Erbe;MEISTERSCHAFT|Kampf um den Titel;ZWEITELIGA|Spielklasse nach dem Abstieg;AMATEURE|Erreichten 1993 das Pokalfinale;EUROPAPOKAL|Internationaler Wettbewerb;SAISONENDE|Letzter Spieltag;KLASSENERHALT|Rettung vor dem Abstieg;NEUANFANG|Start nach einer Krise;GRUENDER|Schufen den Verein;ERFOLG|Positives Ergebnis;LEGENDEN|Große Namen der Historie;WESTBERLIN|Teil Berlins zur Mauerzeit"
+].map(s=>s.split(';').map(x=>x.split('|')));
+let S=JSON.parse(localStorage.getItem('hk')||'{}');S.s=S.s||{};if(S.h==null)S.h=215;
+const save=()=>localStorage.setItem('hk',JSON.stringify(S));
+const md=$('#md');
+function theme(){document.documentElement.style.setProperty('--h',S.h);document.body.classList.toggle('dk',!!S.dk);md.innerHTML=S.dk?'<span>☀</span>Lightmode':'<span>☾</span>Darkmode';document.querySelector('meta[name=theme-color]').content=S.dk?'#2b2b2b':'#ffffff'}
+md.onclick=()=>{S.dk=!S.dk;theme();save()};
+const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const GC={};
+function gen(ci,pi){const K=ci+'_'+pi;if(GC[K])return GC[K];let best=null;
+ for(let t=0;t<40;t++){const rnd=rng(ci*7919+pi*131+t*17+3);
+  const ws=POOL(ci).map(x=>[rnd(),x]).sort((a,b)=>a[0]-b[0]).slice(0,11).map(x=>x[1]).sort((a,b)=>b[0].length-a[0].length);
+  const g={},W=[],get=(r,c)=>g[r+','+c];
+  const can=(a,d,r,c)=>{const dr=d,dc=1-d;if(get(r-dr,c-dc))return-1;const kE=get(r+a.length*dr,c+a.length*dc);if(kE&&kE.l)return-1;let x=0;
+   for(let i=0;i<a.length;i++){const R=r+i*dr,C=c+i*dc,k=get(R,C);
+    if(k){if(!k.l||k.l!=a[i]||k.d[d])return-1;x++}else{const n1=get(R+dc,C+dr),n2=get(R-dc,C-dr);if((n1&&n1.l)||(n2&&n2.l))return-1}}return x};
+  const put=(a,cl,d,r,c)=>{const dr=d,dc=1-d;for(let i=0;i<a.length;i++){const R=r+i*dr,C=c+i*dc,k=get(R,C);if(k)k.d[d]=1;else g[R+','+C]={l:a[i],d:{[d]:1}}}
+   g[(r-dr)+','+(c-dc)]={c:cl,w:W.length};W.push({a,cl,d,r,c})};
+  put(ws[0][0],ws[0][1],0,0,1);
+  for(const[a,cl]of ws.slice(1)){const cand=[];
+   for(const w of W)for(let i=0;i<w.a.length;i++)for(let j=0;j<a.length;j++)if(w.a[i]==a[j]){const d=1-w.d,r=w.r+(w.d?i:0),c=w.c+(w.d?0:i),R=r-(d?j:0),C=c-(d?0:j);if(can(a,d,R,C)>=1)cand.push([d,R,C])}
+   if(cand.length){const p=cand[Math.floor(rnd()*cand.length)];put(a,cl,...p)}}
+  if(!best||W.length>best.W.length)best={g,W};if(W.length>=9)break}
+ let mr=1e9,mc=1e9,xr=-1e9,xc=-1e9;const{g,W}=best;
+ for(const k in g){const[r,c]=k.split(',').map(Number);mr=Math.min(mr,r);mc=Math.min(mc,c);xr=Math.max(xr,r);xc=Math.max(xc,c)}
+ const cells={};for(const k in g){const[r,c]=k.split(',').map(Number);cells[(r-mr)+','+(c-mc)]=g[k]}
+ W.forEach((w,wi)=>{w.r-=mr;w.c-=mc;w.k=[...w.a].map((_,i)=>(w.r+(w.d?i:0))+','+(w.c+(w.d?0:i)));w.k.forEach(k=>{const c=cells[k];(c.ws=c.ws||[]).push(wi)})});
+ return GC[K]={cells,W,rows:xr-mr+1,cols:xc-mc+1}}
+const POOL=ci=>RAW[ci];
+const SZ=66;let lv=0,ov=0,kb=0,cur={c:0,p:0},P,st,sel=null,E={};
+const title=t=>$('#hd').textContent=t;
+function show(v){['sp','ct','ls','pz'].forEach(x=>$('#'+x).style.display=x==v?(x=='sp'?'flex':'block'):'none');$('#tp').style.display=v=='pz'?'block':'none';if(v!='pz')closeKb()}
+function pct(ci,pi){const s=S.s[ci+'_'+pi];return s?s.p||0:0}
+function toCats(){title('Hertha BSC Kreuzworträtsel');show('ct');const c=$('#ct');c.innerHTML='';
+ CN.forEach((n,ci)=>{let d=0;for(let i=0;i<50;i++)if(pct(ci,i)>=1)d++;const b=el('button','cb',n+'<small>'+d+' von 50 gelöst</small>');b.onclick=()=>{cur.c=ci;history.pushState({l:1},'');lv=1;toList()};c.appendChild(b)})}
+function toList(){title(CN[cur.c]);show('ls');const c=$('#ls');c.innerHTML='';const g=el('div','g');
+ for(let i=0;i<50;i++){const p=pct(cur.c,i),n=el('div','n'+(p>=1?' s':''),'<div>'+(i+1)+'</div>');n.style.setProperty('--pr',Math.round(p*100));n.onclick=()=>{history.pushState({l:2},'');lv=2;toPz(i)};g.appendChild(n)}c.appendChild(g)}
+let T={x:0,y:0,s:1};const gv=$('#gv'),wr=$('#wr'),ptr=new Map();let mv=0,multi=0,pd=0;
+function toPz(pi){cur.p=pi;title('Rätsel '+(pi+1));show('pz');P=gen(cur.c,pi);const k=cur.c+'_'+pi;S.s[k]=S.s[k]||{e:{},f:{},p:0};st=S.s[k];sel=null;E={};wr.innerHTML='';
+ wr.style.width=P.cols*SZ+1+'px';wr.style.height=P.rows*SZ+1+'px';
+ for(const k in P.cells){const[r,c]=k.split(',').map(Number),C=P.cells[k],d=el('div','c '+(C.l?'l':'q'));d.dataset.k=k;d.style.cssText=`left:${c*SZ}px;top:${r*SZ}px;width:${SZ+1}px;height:${SZ+1}px`;
+  if(C.l){P.W.forEach(w=>{if(w.r==r&&w.c==c)d.appendChild(el('i','r'+w.d))});E[k]={el:d,b:d.appendChild(el('b'))}}else d.textContent=C.c;wr.appendChild(d)}
+ const vw=gv.clientWidth,vh=gv.clientHeight;T.s=Math.max(.7,Math.min(1,(vw-12)/(P.cols*SZ)));const gw=P.cols*SZ*T.s,gh=P.rows*SZ*T.s;T.x=Math.max(0,(vw-gw)/2);T.y=gh<vh?(vh-gh)/2:6;ap(0);paint()}
+const lim=()=>{const vw=gv.clientWidth,vh=gv.clientHeight,gw=P.cols*SZ*T.s+1,gh=P.rows*SZ*T.s+1;return{x:gw<=vw?[0,vw-gw]:[vw-gw,0],y:gh<=vh?[0,vh-gh]:[vh-gh,0],vw,vh}};
+const cl=(v,a)=>Math.min(a[1],Math.max(a[0],v));
+const ap=t=>{wr.style.transition=t?'transform .28s cubic-bezier(.2,.8,.3,1)':'none';wr.style.transform=`translate(${T.x}px,${T.y}px) scale(${T.s})`};
+const back=()=>{if(!P)return;const L=lim();T.x=cl(T.x,L.x);T.y=cl(T.y,L.y);ap(1)};
+const pdist=()=>{const a=[...ptr.values()];return a.length>1?Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]):0};
+gv.onpointerdown=e=>{if(!P)return;try{gv.setPointerCapture(e.pointerId)}catch(_){}ptr.set(e.pointerId,[e.clientX,e.clientY]);if(ptr.size==1){mv=0;multi=0}else{multi=1;pd=pdist()}ap(0)};
+gv.onpointermove=e=>{const p=ptr.get(e.pointerId);if(!p)return;
+ if(ptr.size==1){const dx=e.clientX-p[0],dy=e.clientY-p[1];mv+=Math.abs(dx)+Math.abs(dy);T.x+=dx;T.y+=dy;ptr.set(e.pointerId,[e.clientX,e.clientY]);const L=lim();T.x=cl(T.x,[L.x[0]-L.vw/2,L.x[1]+L.vw/2]);T.y=cl(T.y,[L.y[0]-L.vh/2,L.y[1]+L.vh/2]);ap(0)}
+ else if(ptr.size==2){ptr.set(e.pointerId,[e.clientX,e.clientY]);const a=[...ptr.values()],d=pdist();
+  if(pd>10&&d>10){const q=gv.getBoundingClientRect(),mx=(a[0][0]+a[1][0])/2-q.left,my=(a[0][1]+a[1][1])/2-q.top,s2=Math.min(2.5,Math.max(.3,T.s*d/pd)),f=s2/T.s;T.x=mx-(mx-T.x)*f;T.y=my-(my-T.y)*f;T.s=s2;pd=d;ap(0)}}};
+gv.onpointerup=gv.onpointercancel=e=>{if(!ptr.has(e.pointerId))return;ptr.delete(e.pointerId);
+ if(!ptr.size){if(!multi&&mv<10&&e.type=='pointerup')tap(e.clientX,e.clientY);back()}else{pd=0;multi=1}};
+const ws=w=>w.k.every(k=>st.e[k]==P.cells[k].l);
+function fixAll(){P.W.forEach(w=>{if(ws(w))w.k.forEach(k=>st.f[k]=1)})}
+function paint(){let ok=0,tot=0;
+ for(const k in E){const c=P.cells[k];tot++;const v=st.e[k];if(v==c.l)ok++;E[k].b.textContent=v||'';
+  let cls='c l';const sw=sel&&P.W[sel.w];
+  if(c.ws.some(i=>ws(P.W[i])))cls+=' sv';else{if(st.f[k])cls+=' fx';if(sw&&sw.k.includes(k))cls+=' hl'}
+  if(sw&&sw.k[sel.i]==k)cls+=' sl';E[k].el.className=cls}
+ st.p=tot?ok/tot:0;save();
+ if(sel){const w=P.W[sel.w];$('#pn').innerHTML='<span class="n1">('+w.a.length+')</span><div class="d">'+w.k.map(k=>'<span'+(st.f[k]?' class="f"':'')+'>'+(st.e[k]||'&nbsp;')+'</span>').join('')+'</div>'}}
+function vis(){if(!sel)return;const[r,c]=P.W[sel.w].k[sel.i].split(',').map(Number),q=SZ*T.s,x=T.x+c*q,y=T.y+r*q,L=lim(),top=kb?64:0,m=6;
+ if(y<top)T.y+=top-y+m;else if(y+q>L.vh)T.y-=y+q-L.vh+m;if(x<0)T.x+=m-x;else if(x+q>L.vw)T.x-=x+q-L.vw+m;ap(1)}
+function openKb(){if(kb)return;kb=1;$('#kb').classList.add('o');$('#pn').classList.add('o');gv.style.bottom='218px'}
+function closeKb(){if(!kb)return;kb=0;$('#kb').classList.remove('o');$('#pn').classList.remove('o');gv.style.bottom='0';if(P)setTimeout(back,50)}
+function tap(x,y){const t=document.elementFromPoint(x,y),d=t&&t.closest&&t.closest('.c');if(!d)return;const k=d.dataset.k,c=P.cells[k];
+ if(c.l){let w;if(sel&&c.ws.length>1&&P.W[sel.w].k[sel.i]==k)w=c.ws.find(i=>i!=sel.w);else w=sel&&c.ws.includes(sel.w)?sel.w:c.ws[0];sel={w,i:P.W[w].k.indexOf(k)}}
+ else{const W=P.W[c.w],i=W.k.findIndex(q=>!st.f[q]);sel={w:c.w,i:i<0?0:i}}
+ openKb();paint();vis()}
+function key(ch){if(!sel)return;const w=P.W[sel.w];
+ if(ch=='<'){const k=w.k[sel.i];if(!st.f[k]&&st.e[k])delete st.e[k];else{let j=sel.i-1;while(j>=0&&st.f[w.k[j]])j--;if(j>=0){sel.i=j;delete st.e[w.k[j]]}}}
+ else{let j=sel.i;while(j<w.k.length&&st.f[w.k[j]])j++;if(j>=w.k.length)return;st.e[w.k[j]]=ch;fixAll();sel.i=j;let n=j+1;while(n<w.k.length&&st.f[w.k[n]])n++;if(n<w.k.length)sel.i=n}
+ paint();vis()}
+$('#tp').onclick=()=>{if(!sel)return;const k=P.W[sel.w].k[sel.i];if(!st.f[k]){st.e[k]=P.cells[k].l;st.f[k]=1;fixAll()}paint()};
+['QWERTZUIOP','ASDFGHJKL','▾YXCVBNM<'].forEach(r=>{const d=el('div','kr');[...r].forEach(ch=>{const b=el('div','kk',ch=='<'?'⌫':ch);b.onpointerdown=e=>{e.preventDefault();if(ch=='▾'){history.back()}else key(ch)};d.appendChild(b)});$('#kb').appendChild(d)});
+addEventListener('popstate',e=>{const l=(e.state&&e.state.l)||0;
+ if(ov){ov=0;$('#st').style.display='none';return}
+ if(kb&&l<2){closeKb();history.pushState({l:2},'');return}
+ lv=l;if(l==0)toCats();else if(l==1)toList();else toPz(cur.p)});
+$('#gear').onclick=()=>{if(ov)history.back();else{ov=1;history.pushState({l:lv,s:1},'');$('#st').style.display='flex'}};
+$('#fd').onclick=()=>{if(ov)history.back()};
+const rg=$('#rg');
+const hue=(e,cap)=>{const q=rg.getBoundingClientRect(),dx=e.clientX-q.left-q.width/2,dy=e.clientY-q.top-q.height/2;if(Math.hypot(dx,dy)<86)return;if(cap)rg.setPointerCapture(e.pointerId);S.h=Math.round((Math.atan2(dx,-dy)*180/Math.PI+360)%360);theme();save()};
+rg.onpointerdown=e=>hue(e,1);rg.onpointermove=e=>{if(e.buttons&&rg.hasPointerCapture(e.pointerId))hue(e)};
+function splash(){const r=$('#sr');r.innerHTML='';const W=r.clientWidth,H=r.clientHeight,B=[];let n=0,down=0,done=0;
+ [...'START'].forEach(ch=>{const e=el('div','sb',ch);r.appendChild(e);B.push({e,x:W*.2+Math.random()*W*.5,y:H*.15+Math.random()*H*.6,vx:(Math.random()<.5?-1:1)*(.5+Math.random()*.6),vy:(Math.random()<.5?-1:1)*(.5+Math.random()*.6)})});
+ const draw=()=>B.forEach(b=>b.e.style.transform=`translate(${b.x}px,${b.y}px)`);
+ (function f(){if(done||$('#sp').style.display=='none')return;B.forEach(b=>{b.x+=b.vx;b.y+=b.vy;if(b.x<0||b.x>W-56)b.vx*=-1;if(b.y<0||b.y>H-56)b.vy*=-1});draw();requestAnimationFrame(f)})();
+ const rs=()=>{n=0;B.forEach(b=>b.e.classList.remove('h'))};
+ const hit=e=>{if(done)return;const q=r.getBoundingClientRect(),x=e.clientX-q.left,y=e.clientY-q.top,b=B[n];
+  if(Math.hypot(b.x+28-x,b.y+28-y)<40){b.e.classList.add('h');n++;if(n==5){done=1;B.forEach((b,i)=>{b.e.style.transition='transform .6s';b.e.classList.add('on');b.x=W/2-148+i*60;b.y=H/2-28});draw();setTimeout(toCats,1300)}}};
+ r.onpointerdown=e=>{down=1;rs();hit(e)};r.onpointermove=e=>{if(down)hit(e)};r.onpointerup=r.onpointercancel=()=>{down=0;if(!done)rs()}}
+$('#sk').onclick=()=>toCats();
+theme();history.replaceState({l:0},'');title('Hertha BSC');show('sp');splash();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
