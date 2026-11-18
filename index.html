@@ -53,7 +53,7 @@ i.r1{top:0;left:calc(50% - 9px);border-left:9px solid transparent;border-right:9
 #fd{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px;border-radius:50%;border:0;background:var(--a);color:#fff;font-size:22px;font-weight:700}
 #md,#hb{width:210px;height:52px;border:0;border-radius:14px;font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;background:#2b2b2b;color:#fff}#hb{background:#004D9E}
 body.dk #md{background:#fff;color:#2b2b2b}
-#md span{color:var(--a);font-size:20px;margin-right:6px}
+#md svg{color:var(--a);margin-right:8px;flex:none}
 </style></head><body>
 <div id="hd"></div><button id="gear">⚙</button><button id="tp">Tipp</button>
 <div class="v" id="sp"><p>Verbinde H-E-R-T-H-A der Reihe nach</p><div id="sr"></div><button id="sk">Überspringen</button></div>
@@ -74,7 +74,7 @@ const RAW=[
 let S=JSON.parse(localStorage.getItem('hk')||'{}');S.s=S.s||{};if(S.h==null)S.h=215;if(S.sa==null){S.sa=80;S.li=42}
 const save=()=>localStorage.setItem('hk',JSON.stringify(S));
 const md=$('#md');
-function theme(){const rt=document.documentElement.style;rt.setProperty('--h',S.h);rt.setProperty('--s',S.sa+'%');rt.setProperty('--l',S.li+'%');document.body.classList.toggle('dk',!!S.dk);md.innerHTML=S.dk?'<span>☀</span>Lightmode':'<span>☾</span>Darkmode';document.querySelector('meta[name=theme-color]').content=S.dk?'#2b2b2b':'#ffffff'}
+function theme(){const rt=document.documentElement.style;rt.setProperty('--h',S.h);rt.setProperty('--s',S.sa+'%');rt.setProperty('--l',S.li+'%');document.body.classList.toggle('dk',!!S.dk);md.innerHTML=S.dk?'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Lightmode':'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>Darkmode';document.querySelector('meta[name=theme-color]').content=S.dk?'#2b2b2b':'#ffffff'}
 md.onclick=()=>{S.dk=!S.dk;theme();save()};$('#hb').onclick=()=>{S.h=211;S.sa=100;S.li=31;theme();save()};
 const rng=a=>()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
 const GC={};
@@ -112,14 +112,14 @@ function toPz(pi){cur.p=pi;title('Rätsel '+(pi+1));show('pz');P=gen(cur.c,pi);c
  for(const k in P.cells){const[r,c]=k.split(',').map(Number),C=P.cells[k],d=el('div','c '+(C.l?'l':'q'));d.dataset.k=k;d.style.cssText=`left:${c*SZ}px;top:${r*SZ}px;width:${SZ+1}px;height:${SZ+1}px`;
   if(C.l){P.W.forEach(w=>{if(w.r==r&&w.c==c)d.appendChild(el('i','r'+w.d))});E[k]={el:d,b:d.appendChild(el('b'))}}else d.textContent=C.c;wr.appendChild(d)}
  const vw=gv.clientWidth,vh=gv.clientHeight;T.s=Math.max(.7,Math.min(1,(vw-12)/(P.cols*SZ)));const gw=P.cols*SZ*T.s,gh=P.rows*SZ*T.s;T.x=Math.max(0,(vw-gw)/2);T.y=gh<vh?(vh-gh)/2:6;ap(0);paint()}
-const lim=()=>{const vw=gv.clientWidth,vh=gv.clientHeight,gw=P.cols*SZ*T.s+1,gh=P.rows*SZ*T.s+1;return{x:gw<=vw?[0,vw-gw]:[vw-gw,0],y:gh<=vh?[0,vh-gh]:[vh-gh,0],vw,vh}};
+const lim=()=>{const vw=gv.clientWidth,vh=gv.clientHeight,gw=P.cols*SZ*T.s+1,gh=P.rows*SZ*T.s+1;const bx=gw<=vw?[0,vw-gw]:[vw-gw,0],by=gh<=vh?[0,vh-gh]:[vh-gh,0];return{x:[bx[0]-gw/2,bx[1]+gw/2],y:[by[0]-gh/2,by[1]+gh/2],vw,vh}};
 const cl=(v,a)=>Math.min(a[1],Math.max(a[0],v));
 const ap=t=>{wr.style.transition=t?'transform .28s cubic-bezier(.2,.8,.3,1)':'none';wr.style.transform=`translate(${T.x}px,${T.y}px) scale(${T.s})`};
 const back=()=>{if(!P)return;const L=lim();T.x=cl(T.x,L.x);T.y=cl(T.y,L.y);ap(1)};
 const pdist=()=>{const a=[...ptr.values()];return a.length>1?Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1]):0};
 gv.onpointerdown=e=>{if(!P)return;try{gv.setPointerCapture(e.pointerId)}catch(_){}ptr.set(e.pointerId,[e.clientX,e.clientY]);if(ptr.size==1){mv=0;multi=0}else{multi=1;pd=pdist()}ap(0)};
 gv.onpointermove=e=>{const p=ptr.get(e.pointerId);if(!p)return;
- if(ptr.size==1){const dx=e.clientX-p[0],dy=e.clientY-p[1];mv+=Math.abs(dx)+Math.abs(dy);T.x+=dx;T.y+=dy;ptr.set(e.pointerId,[e.clientX,e.clientY]);const L=lim();T.x=cl(T.x,[L.x[0]-L.vw,L.x[1]+L.vw]);T.y=cl(T.y,[L.y[0]-L.vh,L.y[1]+L.vh]);ap(0)}
+ if(ptr.size==1){const dx=e.clientX-p[0],dy=e.clientY-p[1];mv+=Math.abs(dx)+Math.abs(dy);T.x+=dx;T.y+=dy;ptr.set(e.pointerId,[e.clientX,e.clientY]);const L=lim();T.x=cl(T.x,[L.x[0]-L.vw*.3,L.x[1]+L.vw*.3]);T.y=cl(T.y,[L.y[0]-L.vh*.3,L.y[1]+L.vh*.3]);ap(0)}
  else if(ptr.size==2){ptr.set(e.pointerId,[e.clientX,e.clientY]);const a=[...ptr.values()],d=pdist();
   if(pd>10&&d>10){const q=gv.getBoundingClientRect(),mx=(a[0][0]+a[1][0])/2-q.left,my=(a[0][1]+a[1][1])/2-q.top,s2=Math.min(2.5,Math.max(.3,T.s*d/pd)),f=s2/T.s;T.x=mx-(mx-T.x)*f;T.y=my-(my-T.y)*f;T.s=s2;pd=d;ap(0)}}};
 gv.onpointerup=gv.onpointercancel=e=>{if(!ptr.has(e.pointerId))return;ptr.delete(e.pointerId);
